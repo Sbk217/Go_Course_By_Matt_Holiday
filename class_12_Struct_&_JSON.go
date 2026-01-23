@@ -28,7 +28,7 @@ func main() {
 	//initializer
 	var e2 = Employee{
 		"Sam",
-		1,
+		2,
 		nil,
 		time.Now(),
 	}
@@ -38,9 +38,38 @@ func main() {
 	//initializer
 	var e3 = Employee{
 		Name:   "Rob",
-		Number: 1,
+		Number: 3,
 		boss:   e2.boss,
 		Hired:  time.Now(),
 	}
 	fmt.Printf("%T %+[1]v\n", e3)
+
+	//creating a company c a map of strings to employee pointers
+	c := map[string]*Employee{}
+	//here Tobias is the boss of the company c
+	//here a very important concept of maps, pointers and structs is showcased
+	//here if we used c:= map[string]Employee then we cannot set the following such as
+	//c["Tobias"] = &Employee as the map will point to a struct type map memory allocation is
+	//dynamic which assignes memory as per the data given in the map which will result in a
+	//dangling pointer for c["Tobias"] thus we provide the address for the struct employee
+	//ie a map having a struct pointer not a simple struct
+
+	c["Tobias"] = &Employee{
+		Name:   "Tobias",
+		Number: 4,
+		boss:   e2.boss,
+		Hired:  time.Now(),
+	}
+	fmt.Printf("%T %+[1]v\n", c["Tobias"])
+
+	c["Stefan"] = &Employee{
+		Name:   "Stefan",
+		Number: 1,
+		boss:   c["Tobias"],
+		Hired:  time.Now(),
+	}
+	//will show the boss but since it is a pointer only the address is shown
+	//in the output
+	fmt.Printf("%T %+[1]v\n", c["Stefan"])
+
 }
