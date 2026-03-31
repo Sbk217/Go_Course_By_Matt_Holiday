@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main_test() {
+func main() {
 	s := "elite"
 
 	fmt.Printf("%8T %[1]v\n", s)

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func test4() {
+func main() {
 	if len(os.Args) < 3 {
 		fmt.Fprintln(os.Stderr, "not enough arguments")
 		os.Exit(-1)
